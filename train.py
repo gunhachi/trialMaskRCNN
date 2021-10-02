@@ -42,6 +42,7 @@ import pylab
 import random
 from tqdm import tqdm
 import time
+import logging as log
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("./")
@@ -62,8 +63,8 @@ DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "/content/drive/My Drive/logs")   # if
 #  Configurations
 ############################################################
 
-category = 'Demo purpose'
-class_names = ['kangaroo']
+category = '' #insert name
+class_names = ['']
 
 class CustomConfig(Config):
     """Configuration for training on the toy  dataset.
@@ -335,9 +336,9 @@ if __name__ == '__main__':
         assert args.image or args.video,\
                "Provide --image or --video to apply color splash"
 
-    print("Weights: ", args.weights)
-    print("Dataset: ", args.dataset)
-    print("Logs: ", args.logs)
+    log.info("Weights: ", args.weights)
+    log.info("Dataset: ", args.dataset)
+    log.info("Logs: ", args.logs)
 
     # Configurations
     if args.command == "train":
@@ -375,7 +376,7 @@ if __name__ == '__main__':
         weights_path = args.weights
 
     # Load weights
-    print("Loading weights ", weights_path)
+    log.info("Loading weights ", weights_path)
     if args.weights.lower() == "coco":
         # Exclude the last layers because they require a matching
         # number of classes
@@ -392,5 +393,5 @@ if __name__ == '__main__':
         detect_and_color_splash(model, image_path=args.image,
                                 video_path=args.video)
     else:
-        print("'{}' is not recognized. "
+        log.warning("'{}' is not recognized. "
               "Use 'train' or 'splash'".format(args.command))
