@@ -37,7 +37,7 @@ output = args["output"]
 model = modellib.MaskRCNN(mode="inference", config=config, model_dir='/content/drive/My Drive/') #you can insert the any path of this is not important but you need to insert only path 
 model.load_weights('/content/drive/My Drive/logs/demo purpose20200823T1712/mask_rcnn_demo purpose_0010.h5', by_name=True) #if you run test this script on your local system you need to replace this path 
 
-class_names = ['kangaroo','']
+class_names = ['','']
 
 def random_colors(N):
     np.random.seed(1)
